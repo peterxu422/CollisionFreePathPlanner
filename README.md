@@ -9,9 +9,9 @@ Class Definitions
 <p>
 Obstacle:  
 <br>
-- Members: ArrayList/Vector of Vertices  
-			ArrayList/Vector of grownVertices  
-			static List<Obstacle> obstacles  
+- Members: ArrayList/Vector of Vertices  <br>
+			ArrayList/Vector of grownVertices  <br>
+			static List<Obstacle> obstacles  <br>
   
 - Methods: void growObstacle(size/dimensions of Roomba)  
 </p>
