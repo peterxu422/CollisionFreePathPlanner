@@ -17,7 +17,10 @@ Obstacle:
 
 <p>
 ObstacleReader:  
-- Members: BufferedReader br  
+
+- Members:   
+BufferedReader br  
+
 		List<Obstacle> obstacles = Obstacle.obstacles  
 		  
 - Methods: constructor ObstacleReader(String datafile)  
@@ -26,6 +29,7 @@ ObstacleReader:
 
 <p>
 Vgraph:  
+
 - Members:  
 	  
 - Methods:  
@@ -33,6 +37,7 @@ Vgraph:
 
 <p>
 PathPlanner:    
+
 - Members:  
     
 - Methods:  
@@ -40,6 +45,7 @@ PathPlanner:
 
 <p>
 Vertices:  
+
 - Members: double x, y  
 </p>
 
