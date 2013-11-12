@@ -1,8 +1,12 @@
 package Draw;
 
 import javax.swing.*;
+
+import Objects.Obstacle;
+
 import java.awt.*;
 import java.awt.geom.*;
+import java.util.ArrayList;
 public class SceneDrawer  {
 	JPanel panel;
     public SceneDrawer()
@@ -32,4 +36,8 @@ public class SceneDrawer  {
         frame.add(panel);
         frame.setVisible( true );
     }
+    public void drawObstacles(ArrayList <Obstacle> obstacles)
+    {
+    }
+    
 }
