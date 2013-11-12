@@ -8,6 +8,7 @@ classes: Obstacle, ObstacleReader, Vertices (?), Vgraph, PathPlanner, Map
 Class Definitions
 <p>
 Obstacle:  
+<br>
 - Members: ArrayList/Vector of Vertices  
 			ArrayList/Vector of grownVertices  
 			static List<Obstacle> obstacles  
@@ -17,7 +18,7 @@ Obstacle:
 
 <p>
 ObstacleReader:  
-
+  
 - Members:   
 BufferedReader br  
 
