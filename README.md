@@ -31,6 +31,7 @@ constructor ObstacleReader(String datafile)  <br>
 </p>
 
 <p>
+<a href="http://mathworld.wolfram.com/VisibilityGraph.html">Visibility Graph Ref </a> <br>
 Vgraph:  <br>
 
 - Members:  <br>
