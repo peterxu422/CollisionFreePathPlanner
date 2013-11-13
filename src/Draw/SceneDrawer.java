@@ -3,22 +3,24 @@ package Draw;
 import javax.swing.*;
 
 import Objects.Obstacle;
+import Objects.Vertex;
 
 import java.awt.*;
 import java.awt.geom.*;
 import java.util.ArrayList;
 public class SceneDrawer  {
 	JPanel panel;
+	JFrame frame; 
     public SceneDrawer()
     {
-         JFrame frame = new JFrame();
+         frame= new JFrame();
 
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
          frame.setTitle("World Map");
          frame.setSize (820, 640);
          frame.setVisible(true);
-         JPanel panel = new JPanel() {         
+         panel = new JPanel() {         
         	 public void paintComponent( Graphics g ) {
                 super.paintComponent(g);
                 Graphics2D g2 = (Graphics2D)g;
@@ -38,6 +40,17 @@ public class SceneDrawer  {
     }
     public void drawObstacles(ArrayList <Obstacle> obstacles)
     {
+    	for(Obstacle obs: obstacles)
+    	{
+    		ArrayList <Vertex> vertices = obs.getPoints();
+    		for(int vertItt = 0; vertItt< vertices.size(); vertItt ++)
+    		{
+    			Line2D line = new Line2D.Double(vertices.get(vertItt).getX(),
+    											vertices.get(vertItt).getY(),
+    											vertices.get((vertItt + 1)% vertices.size()).getX(),
+    											vertices.get((vertItt + 1)% vertices.size()).getY());
+    		}
+    	}
     }
     
 }

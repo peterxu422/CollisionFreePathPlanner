@@ -65,12 +65,9 @@ public class homework4 {
 		y =  Double.parseDouble(str.substring(spaceIndex + 1));
 		Vertex endPoint = new Vertex(x, y);
 		
-		
-		
-		
-		
-		
-		SceneDrawer aDrawer = new SceneDrawer();
+		//Draw Obstacles
+		//SceneDrawer aDrawer = new SceneDrawer();
+		//aDrawer.drawObstacles(obstacles);
 		
 	}
 
