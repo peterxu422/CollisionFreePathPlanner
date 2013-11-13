@@ -25,7 +25,7 @@ public class homework4 {
 		}
 		
 		ArrayList <Obstacle> obstacles = new ArrayList <Obstacle>(); 
-		
+		double lowX = 100, lowY= 100, highX = -100, highY = -100;
 		
 		//Reading and creation of obstacles
 		BufferedReader obsReader = new BufferedReader(new FileReader(new File(args[0])));
@@ -43,6 +43,11 @@ public class homework4 {
 			 
 			 double x =  Double.parseDouble(str.substring(0, spaceIndex));
 			 double y =  Double.parseDouble(str.substring(spaceIndex + 1));
+			 if (x > highX) 	highX = x;
+			 if (x < lowX) 	 	lowX = x;
+			 if (y > highY) 	highY = y;
+			 if (y < lowY) 	 	lowY = y;
+			 
 			 obsVertices.add(new Vertex(x, y));
 			}
 			obstacles.add(new Obstacle(obsVertices));
@@ -66,8 +71,9 @@ public class homework4 {
 		Vertex endPoint = new Vertex(x, y);
 		
 		//Draw Obstacles
-		//SceneDrawer aDrawer = new SceneDrawer();
-		//aDrawer.drawObstacles(obstacles);
+		SceneDrawer aDrawer = new SceneDrawer();
+		aDrawer.setDimensions(lowX, lowY, highX, highY);
+		aDrawer.drawObstacles(obstacles);
 		
 	}
 
