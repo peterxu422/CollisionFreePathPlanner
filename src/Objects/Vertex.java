@@ -24,5 +24,23 @@ public class Vertex {
 	{
 		return this.Y;
 	}
-
+	
+	public void setX(double x)
+	{
+		this.X = x;
+	}
+	
+	public void setY(double y)
+	{
+		this.Y = y;
+	}
+	
+	public Vertex clone() {
+		Vertex v = new Vertex(X, Y);
+		return v;
+	}
+	
+	public String toString() {
+		return "("+X+","+Y+")";
+	}
 }
