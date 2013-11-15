@@ -1,19 +1,15 @@
 
-import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
 import Draw.SceneDrawer;
 import Objects.Obstacle;
+import Objects.Line;
 import Objects.Vertex;
+import Solve.VisibilityGraph;
 
 public class homework4 {
 
@@ -74,7 +70,12 @@ public class homework4 {
 		SceneDrawer aDrawer = new SceneDrawer();
 		aDrawer.setDimensions(lowX, lowY, highX, highY);
 		aDrawer.drawObstacles(obstacles);
-		
-	}
+		aDrawer.drawPoint(startPoint, "start");
+		aDrawer.drawPoint(endPoint, "end");
+		VisibilityGraph visGraph = new VisibilityGraph();
+		ArrayList<Line> visLines = visGraph.calculateVisibility(obstacles,startPoint,endPoint);
+		aDrawer.drawVisiLines(visLines, "blue");
 
+	
+	}
 }

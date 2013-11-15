@@ -44,9 +44,9 @@ public class LineDrawer  extends JComponent{
 		@Override
 		protected void paintComponent(Graphics g) {
 		    super.paintComponent(g);
-		    for (Line line : lines) {
-		        g.setColor(line.color);
-		        g.drawLine(line.x1,line.y1,line.x2,line.y2);
+		    for (int i = 0; i< lines.size(); i ++ ) {
+		        g.setColor(lines.get(i).color);
+		        g.drawLine(lines.get(i).x1,lines.get(i).y1,lines.get(i).x2,lines.get(i).y2);
 		       
 		    }
 		
