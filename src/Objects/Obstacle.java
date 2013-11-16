@@ -20,7 +20,7 @@ public class Obstacle {
 	public Obstacle ()
 	{
 		this.myPoints = new ArrayList <Vertex> ();
-
+		
 		myExpandedPoints = null;
 	}
 	
@@ -43,7 +43,6 @@ public class Obstacle {
 	
 	public void ExpandObstacle()
 	{
-		//TODO Implement
 		myExpandedPoints = new ArrayList<Vertex> (4*myPoints.size());
 		//for(Vertex v : myPoints)
 			//myExpandedPoints.add(v.clone());
@@ -104,5 +103,4 @@ public class Obstacle {
 		}
 		return s;
 	}
-
 }

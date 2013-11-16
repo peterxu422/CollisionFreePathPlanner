@@ -7,10 +7,9 @@ import Objects.Obstacle;
 import Objects.Vertex;
 
 public class VisibilityGraph {
-
+	
 	public VisibilityGraph(){
 	}
-	
 	
 	public ArrayList<Line> calculateVisibility(ArrayList<Obstacle> obstacles,Vertex startPoint,
 											   Vertex endPoint) {
@@ -22,14 +21,12 @@ public class VisibilityGraph {
 		endPts.addPoint(endPoint);
 		obstacles.add(startPts);
 		obstacles.add(endPts);
-		
 		ArrayList<Line> out = new ArrayList <Line>();
 		
 		for(int startObs =1; startObs < obstacles.size(); startObs++){
 			for(int startVert = 0; startVert < obstacles.get(startObs).getPoints().size(); startVert ++){
 				for(int endObs =1; endObs < obstacles.size() ; endObs++){
 					for(int endVert = 0; endVert < obstacles.get(endObs).getPoints().size(); endVert ++){
-						
 						
 						if(startObs != endObs || (obstacles.get(endObs).getPoints().size() > 1 &&
 								((startVert == (endVert + 1) % obstacles.get(endObs).getPoints().size()) ||

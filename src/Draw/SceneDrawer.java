@@ -2,17 +2,13 @@ package Draw;
 
 import javax.swing.*;
 
-import java.awt.Graphics;
-
 import Objects.Line;
 import Objects.Obstacle;
 import Objects.Vertex;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.geom.*;
 import java.util.ArrayList;
+
 public class SceneDrawer  {
 	JPanel panel;
 	LineDrawer comp;
@@ -55,8 +51,12 @@ public class SceneDrawer  {
     	}
     }
     
-    public void drawVisiLines(ArrayList<Line> visLines, String strColor) {
-    	for(Line line: visLines)
+    public void drawLines(ArrayList<Line> lines, String strColor) {
+    	drawLines(lines,strColor,1);
+    }
+    
+    public void drawLines(ArrayList<Line> lines, String strColor, int thickness) {
+    	for(Line line: lines)
     	{
     		Color color;
     		if (strColor == "blue")
@@ -72,7 +72,8 @@ public class SceneDrawer  {
 						 toPixelCoord(line.getStart().getY(), 'y'),
 						 toPixelCoord(line.getEnd().getX(),'x'),
 						 toPixelCoord(line.getEnd().getY(),'y'),
-						 color);
+						 color,
+						 thickness);
     	}	
 	}
     
@@ -89,8 +90,8 @@ public class SceneDrawer  {
     	else
     		color = new Color(0,255,0);
     	
-    	comp.addLine(x-2,y,x+2,y,color);
-    	comp.addLine(x,y-2,x,y+2,color);
+    	comp.addLine(x-3,y,x+3,y,color);
+    	comp.addLine(x,y-3,x,y+3,color);
     }
     
     private int toPixelCoord(double x1, char axis) {

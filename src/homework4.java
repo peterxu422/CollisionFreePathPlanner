@@ -9,6 +9,7 @@ import Draw.SceneDrawer;
 import Objects.Obstacle;
 import Objects.Line;
 import Objects.Vertex;
+import Solve.DijkstraSolver;
 import Solve.VisibilityGraph;
 
 public class homework4 {
@@ -67,29 +68,16 @@ public class homework4 {
 		Vertex endPoint = new Vertex(x, y);
 		
 		//Draw Obstacles
-		
 		SceneDrawer aDrawer = new SceneDrawer();
 		aDrawer.setDimensions(lowX, lowY, highX, highY);
-				
 		aDrawer.drawObstacles(obstacles);
-		
-		//i=1 to avoid drawing the auditorium boundary
-		for(int i=1; i < obstacles.size(); i++) {
-			Obstacle o = obstacles.get(i);
-			o.ExpandObstacle();
-			System.out.println(o);
-			ArrayList<Vertex> expandedPoints = o.getExpandedPoints();
-			for(Vertex v : expandedPoints)
-				aDrawer.drawPoint(v, "expPt");
-		}
-		
-		
 		aDrawer.drawPoint(startPoint, "start");
 		aDrawer.drawPoint(endPoint, "end");
 		VisibilityGraph visGraph = new VisibilityGraph();
 		ArrayList<Line> visLines = visGraph.calculateVisibility(obstacles,startPoint,endPoint);
-		//aDrawer.drawVisiLines(visLines, "blue");
-		
-	
+		aDrawer.drawLines(visLines, "blue");
+		DijkstraSolver aDijkSolver = new DijkstraSolver(visLines);
+		ArrayList <Line> path = aDijkSolver.findPath(startPoint, endPoint);
+		aDrawer.drawLines(path, "green",3);
 	}
 }
