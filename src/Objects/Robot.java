@@ -3,15 +3,15 @@ package Objects;
 public class Robot {
 	
 	//Assume polygonal dimensions of Robot are square where length is equal to Roomba diameter
-	private Vertex ref;	//Assume ref is upper left
+	private Vertex ref;	//Assume ref is upper left corner of the square representation
 	private Vertex upRight, lowLeft, lowRight;
 	private Vertex verts[]; //{ref, upRight, lowLeft, lowRight}
 	private double diameter;
 	
-	public Robot(Vertex ref) 
+	public Robot(Vertex ref)
 	{
 		this.ref = ref;
-		this.diameter = 1.0;
+		this.diameter = 0.2;
 		upRight = new Vertex(ref.getX()+diameter, ref.getY());
 		lowLeft = new Vertex(ref.getX(), ref.getY() - diameter);
 		lowRight = new Vertex(ref.getX() + diameter, ref.getY() - diameter);
@@ -32,6 +32,35 @@ public class Robot {
 	public void rotate(double theta) 
 	{
 		
+	}
+	
+	//Not in use at the moment. Not quite functional either
+	public void changeOrientation() 
+	{
+		System.out.println(toString());
+		//Change to downward orientation. Set the new ref to the original lowRight
+		upRight.setX(ref.getX() - diameter);
+		lowLeft.setY(ref.getY() + diameter);
+		lowRight.setXY(ref.getX()-diameter, ref.getY()+diameter);
+		verts[1] = upRight;
+		verts[2] = lowLeft;
+		verts[3] = lowRight;
+		System.out.println(toString());
+		
+		/*
+		Vertex tmp1 = ref;
+		Vertex tmp2 = upRight;
+		ref = lowRight;
+		upRight = lowLeft;
+		lowLeft = tmp2;
+		lowRight = tmp1;
+		//System.out.println(ref + " " + upRight + " " + lowLeft + " " + lowRight);
+		verts[0] = ref;
+		verts[1] = upRight;
+		verts[2] = lowLeft;
+		verts[3] = lowRight;
+		//System.out.println(toString());
+		 */
 	}
 	
 	public void reflectX()

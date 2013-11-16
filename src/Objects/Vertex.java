@@ -25,6 +25,12 @@ public class Vertex {
 		return this.Y;
 	}
 	
+	public void setXY(double x, double y)
+	{
+		this.X = x;
+		this.Y = y;
+	}
+	
 	public void setX(double x)
 	{
 		this.X = x;

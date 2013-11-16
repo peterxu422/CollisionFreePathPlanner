@@ -84,11 +84,13 @@ public class SceneDrawer  {
     	Color color;
     	if(strCol.compareTo("start") == 0)
     		color = new Color(255,0,0);
+    	else if(strCol.compareTo("expPt") == 0) //To help me visualize the expanded points
+    		color = new Color(0,0,255);
     	else
     		color = new Color(0,255,0);
     	
-    	comp.addLine(x-5,y,x+5,y,color);
-    	comp.addLine(x,y-5,x,y+5,color);
+    	comp.addLine(x-2,y,x+2,y,color);
+    	comp.addLine(x,y-2,x,y+2,color);
     }
     
     private int toPixelCoord(double x1, char axis) {

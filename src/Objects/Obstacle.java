@@ -44,10 +44,10 @@ public class Obstacle {
 	public void ExpandObstacle()
 	{
 		//TODO Implement
-		myExpandedPoints = new ArrayList<Vertex> (myPoints.size());
-		for(Vertex v : myPoints)
-			myExpandedPoints.add(v.clone());
-		
+		myExpandedPoints = new ArrayList<Vertex> (4*myPoints.size());
+		//for(Vertex v : myPoints)
+			//myExpandedPoints.add(v.clone());
+		int j=0;
 		//Add expanded points
 		for(Vertex v : myPoints) 
 		{
@@ -59,6 +59,33 @@ public class Obstacle {
 			Vertex roboVerts[] = robotClone.getVerts();
 			for(int i=1; i < roboVerts.length; i++)
 				myExpandedPoints.add(roboVerts[i].clone());
+			
+			//Considers other orientations of the robot by simply reflecting its X and Y values with respect to the reference. Makes use of the
+			//robots square symmetry. Limitations are that it only considers robot's orientation for North South East West, but this is sufficient
+			//for rectangular obstacles
+			robotClone.reflectX();
+			robotClone.reflectY();
+			for(int i=1; i < roboVerts.length; i++)
+				myExpandedPoints.add(roboVerts[i].clone());
+			
+			robotClone.reflectX();
+			for(int i=1; i < roboVerts.length; i++)
+				myExpandedPoints.add(roboVerts[i].clone());
+			
+			robotClone.reflectX();
+			robotClone.reflectY();
+			for(int i=1; i < roboVerts.length; i++)
+				myExpandedPoints.add(roboVerts[i].clone());
+			
+			
+			//Debugging code
+			/*
+			System.out.println("Obs1stVert:" + v.toString() + ", robotCloneRef" + robotClone.getRef().toString());
+			System.out.println(robotClone);
+			j++;
+			if(j==1)
+				break;
+			*/
 		}
 			
 	}
