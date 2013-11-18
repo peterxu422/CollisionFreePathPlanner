@@ -67,17 +67,29 @@ public class homework4 {
 		y =  Double.parseDouble(str.substring(spaceIndex + 1));
 		Vertex endPoint = new Vertex(x, y);
 		
+		//Calculate the convex Hull points
+		int size = obstacles.size();
+		for(int i=1; i < size; i++)
+		{
+			obstacles.get(i).ExpandObstacle();
+			obstacles.get(i).computeConvexHull();
+		}
+		
+		
 		//Draw Obstacles
 		SceneDrawer aDrawer = new SceneDrawer();
 		aDrawer.setDimensions(lowX, lowY, highX, highY);
 		aDrawer.drawObstacles(obstacles);
+		aDrawer.drawConvexHull(obstacles);
 		aDrawer.drawPoint(startPoint, "start");
 		aDrawer.drawPoint(endPoint, "end");
 		VisibilityGraph visGraph = new VisibilityGraph();
 		ArrayList<Line> visLines = visGraph.calculateVisibility(obstacles,startPoint,endPoint);
-		aDrawer.drawLines(visLines, "blue");
+		//aDrawer.drawLines(visLines, "blue");
 		DijkstraSolver aDijkSolver = new DijkstraSolver(visLines);
 		ArrayList <Line> path = aDijkSolver.findPath(startPoint, endPoint);
 		aDrawer.drawLines(path, "green",3);
+		
+		
 	}
 }

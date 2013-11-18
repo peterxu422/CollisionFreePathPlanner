@@ -1,6 +1,7 @@
 package Objects;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class Obstacle {
@@ -99,39 +100,22 @@ public class Obstacle {
 	public void computeConvexHull()
 	{
 		//Graham's Algorithm
-		//Testing sample
-		myExpandedPoints = null;
-		myExpandedPoints = new ArrayList<Vertex>(8);
-		myExpandedPoints.add(new Vertex(0,1));
-		myExpandedPoints.add(new Vertex(1,0));
-		myExpandedPoints.add(new Vertex(2,2));
-		myExpandedPoints.add(new Vertex(2,1));
-		myExpandedPoints.add(new Vertex(3,0));
-		myExpandedPoints.add(new Vertex(3,3));
-		myExpandedPoints.add(new Vertex(4,1));
-		myExpandedPoints.add(new Vertex(5,2));
+		
 		//Find Rightmost, Lowest point, P0
 		p0 = getRightLow();
-		assert (p0.getX() == 3.0 && p0.getY() == 0.0);
-		System.out.println("p0:" + p0);
 		
-		System.out.println(myExpandedPoints);
 		//Sort other points angularly about P0. Break ties in favor of closeness. Label sorted P1...PN-1
 		int n = myExpandedPoints.size();
-		assert (n==8);
+		assert (n > 1);
 		quicksort(0, n-1);
 		
-		System.out.println("After sorting\n"+myExpandedPoints);
 		//Stack stuff
 		convexStack = new Stack<Vertex>();
 		convexStack.push(myExpandedPoints.get(n-1));
 		convexStack.push(myExpandedPoints.get(0));
-		System.out.println("stack init:"+convexStack);
 		int i=1;
-		int j =0;
 		while(i < n)
 		{
-			System.out.println(j++);
 			Vertex ptop = convexStack.pop();
 			Vertex ptop1 = convexStack.peek();
 			Vertex pi = myExpandedPoints.get(i);
@@ -144,44 +128,30 @@ public class Obstacle {
 			}
 			//if pi is not strictly left, then pop the top of stack. But this is already handled.
 		}
-		
-		System.out.println("stack: "+convexStack);
+		System.out.println("convexStack:"+convexStack);
+		//Pop the convex hull points into a list
+		convexHullPoints = new ArrayList<Vertex>(convexStack.size());
+		int j = 0;
+		while(true) {
+			System.out.println(j++);
+			try
+			{
+				convexHullPoints.add(convexStack.pop());
+			}
+			catch(EmptyStackException e)
+			{
+				break;
+			}
+		}
 	}
 	
-	public boolean isLeft(Vertex pi, Vertex ptop, Vertex ptop1)
+	public boolean isLeft(Vertex c, Vertex b, Vertex a)
 	{
-		double m = (ptop.getY()-ptop1.getY())/(ptop.getX() - ptop1.getX());
-		double y = ptop.getY();		//Choose a set of points on the line
-		double x = ptop.getX();
-		double b = y - m*x; 		//solve for x-intercept and equation of line 
+		//Resources: http://mathworld.wolfram.com/CrossProduct.html
+		//http://stackoverflow.com/questions/3461453/determine-which-side-of-a-line-a-point-lies
 		
-		double yi = m*pi.getX() + b;;
-		
-		//slope is 0
-		if(m == 0.0)
-			return false; //False because no x is strictly left of such a line
-		//slope is undefined
-		if(m == Double.POSITIVE_INFINITY || m == Double.NEGATIVE_INFINITY)
-		{
-			if(pi.getX() < x)
-				return true;
-			return false;
-		}
-		if(m < 0) //case when slop is negative
-		{
-			if(pi.getY() < yi)
-				return true;
-			return false;
-		}
-		if(m > 0) //slope is positive
-		{
-			if(pi.getY() > yi)
-				return true;
-			return false;
-		}
-		
-		assert false;
-		return false;
+		//Take cross product of the vectors formed and determine directionality. Cross product of 2D vector is determinant
+		return ((b.getX() - a.getX())*(c.getY() - a.getY()) - (b.getY() - a.getY())*(c.getX() - a.getX())) > 0;
 	}
 	
 	public void quicksort(int low, int high)

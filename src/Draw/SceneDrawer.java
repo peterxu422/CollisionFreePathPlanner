@@ -38,7 +38,6 @@ public class SceneDrawer  {
 
     public void drawObstacles(ArrayList <Obstacle> obstacles)
     {
-    	
     	for(Obstacle obs: obstacles)
     	{
     		ArrayList <Vertex> vertices = obs.getPoints();
@@ -47,7 +46,26 @@ public class SceneDrawer  {
     						 toPixelCoord(vertices.get(vertItt).getY(), 'y'),
 							 toPixelCoord(vertices.get((vertItt + 1)% vertices.size()).getX(),'x'),
 							 toPixelCoord(vertices.get((vertItt + 1)% vertices.size()).getY(),'y'));
+    	}
+    }
+    
+    
+    public void drawConvexHull(ArrayList<Obstacle> obstacles)
+    {
+    	int size = obstacles.size();
+    	for(int i=1; i < size; i++)
+    	{
+    		Obstacle obs = obstacles.get(i);
     		
+    		if(obs.getConvexHullPoints() == null)
+    			continue;
+    		
+    		ArrayList <Vertex> vertices = obs.getConvexHullPoints();
+    		for(int vertItt = 0; vertItt< vertices.size(); vertItt ++)
+    			comp.addLine(toPixelCoord(vertices.get(vertItt).getX(),'x'),
+    						 toPixelCoord(vertices.get(vertItt).getY(), 'y'),
+							 toPixelCoord(vertices.get((vertItt + 1)% vertices.size()).getX(),'x'),
+							 toPixelCoord(vertices.get((vertItt + 1)% vertices.size()).getY(),'y'));
     	}
     }
     
