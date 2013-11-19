@@ -13,6 +13,7 @@ public class Obstacle {
 
 	private Robot robotClone;
 	
+	//Initialize the robot position to (0,0)
 	public Obstacle (ArrayList<Vertex> points)
 	{
 		this.myPoints = points;
@@ -34,6 +35,10 @@ public class Obstacle {
 		myExpandedPoints = null;
 	}
 	
+	/**
+	 * Add a new point for the Obstacle
+	 * @param aVertex
+	 */
 	public void addPoint(Vertex aVertex)
 	{
 		myPoints.add(aVertex);
@@ -55,6 +60,10 @@ public class Obstacle {
 		return this.convexHullPoints;
 	}
 	
+
+	/**
+	 * Expanding Obstacle algorithm.
+	 */
 	public void ExpandObstacle()
 	{
 		//TODO Implement
@@ -70,6 +79,7 @@ public class Obstacle {
 			robotClone.reflectX();
 			robotClone.reflectY();
 			
+			//Add the robot's vertices, according to the algorithm
 			Vertex roboVerts[] = robotClone.getVerts();
 			for(int i=1; i < roboVerts.length; i++)
 				myExpandedPoints.add(roboVerts[i].clone());
@@ -116,7 +126,7 @@ public class Obstacle {
 		assert (n > 1);
 		quicksort(0, n-1);
 		
-		//Stack stuff
+		//Stack operations, per the algorithm
 		convexStack = new Stack<Vertex>();
 		convexStack.push(myExpandedPoints.get(n-1));
 		convexStack.push(myExpandedPoints.get(0));
@@ -135,7 +145,7 @@ public class Obstacle {
 			}
 			//if pi is not strictly left, then pop the top of stack. But this is already handled.
 		}
-		//System.out.println("convexStack:"+convexStack);
+
 		//Pop the convex hull points into a list
 		convexHullPoints = new ArrayList<Vertex>(convexStack.size());
 		int j = 0;
@@ -168,6 +178,7 @@ public class Obstacle {
 		
 		while(i <= j)
 		{
+			//Checks if the vertex is is less than or greater than p0 
 			while(myExpandedPoints.get(i).compareWrtP0(pivot, p0) == -1)
 				i++;
 			while(myExpandedPoints.get(j).compareWrtP0(pivot, p0) == 1)
@@ -186,6 +197,10 @@ public class Obstacle {
 			quicksort(i, high);
 	}
 	
+	/**
+	 * Gets the lowest rightmost vertex in the set of expanded points
+	 * @return rightmost and lowest vertex
+	 */
 	public Vertex getRightLow()
 	{
 		Vertex p0 = myExpandedPoints.get(0);

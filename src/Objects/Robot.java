@@ -1,5 +1,10 @@
 package Objects;
 
+/**
+ * This class is used for providing a reference for the robot's dimensions when determining expandedPoints.
+ * @author Peter
+ *
+ */
 public class Robot {
 	
 	//Assume polygonal dimensions of Robot are square where length is equal to Roomba diameter
@@ -8,6 +13,7 @@ public class Robot {
 	private Vertex verts[]; //{ref, upRight, lowLeft, lowRight}
 	private double diameter;
 	
+	//Defaults the robot's orientation to North
 	public Robot(Vertex ref)
 	{
 		this.ref = ref;
@@ -63,6 +69,9 @@ public class Robot {
 		 */
 	}
 	
+	/**
+	 * Reflects the robot vertically about the reference
+	 */
 	public void reflectX()
 	{
 		for(Vertex v : verts) {
@@ -76,6 +85,9 @@ public class Robot {
 		}
 	}
 	
+	/**
+	 * Reflects the robot horizontally about the reference
+	 */
 	public void reflectY()
 	{
 		for(Vertex v : verts) {
