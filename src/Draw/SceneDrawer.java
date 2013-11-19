@@ -65,7 +65,8 @@ public class SceneDrawer  {
     			comp.addLine(toPixelCoord(vertices.get(vertItt).getX(),'x'),
     						 toPixelCoord(vertices.get(vertItt).getY(), 'y'),
 							 toPixelCoord(vertices.get((vertItt + 1)% vertices.size()).getX(),'x'),
-							 toPixelCoord(vertices.get((vertItt + 1)% vertices.size()).getY(),'y'));
+							 toPixelCoord(vertices.get((vertItt + 1)% vertices.size()).getY(),'y'),
+							 new Color(210,0,210));
     	}
     }
     

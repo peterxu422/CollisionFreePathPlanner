@@ -53,6 +53,10 @@ public class VisibilityGraph {
 		double x2 = vertex2.getX();double y2 = vertex2.getY();
 		
 		for(int obsItt = 0; obsItt< obstacles.size(); obsItt ++ ){
+			if(!(isContainedIn(obstacles.get(obsItt),vertex) || isContainedIn(obstacles.get(obsItt),vertex2)))
+				System.out.println(isContainedIn(obstacles.get(obsItt),vertex) + " " +isContainedIn(obstacles.get(obsItt),vertex2));
+			if(obsItt > 0 &&(isContainedIn(obstacles.get(obsItt),vertex)|| isContainedIn(obstacles.get(obsItt),vertex2)))
+				return true;
 			Obstacle obs = obstacles.get(obsItt);
 			for(int vertItt = 0; vertItt< obs.getPoints().size(); vertItt ++ )
 			{
@@ -111,4 +115,20 @@ public class VisibilityGraph {
 		return false;
 	}
 
+	private boolean isContainedIn(Obstacle obstacle, Vertex vertex) {
+
+      int i;
+      int j;
+      ArrayList<Vertex> points = obstacle.getPoints();
+      boolean result = false;
+      for (i = 0, j = points.size() - 1; i < points.size(); j = i++) {
+        if ((points.get(i).getY() > vertex.getY()) != (points.get(j).getY() > vertex.getY()) &&
+            (vertex.getX() <= (points.get(i).getX() - 
+            				 points.get(i).getX()) * (vertex.getY() - points.get(i).getY()) / (points.get(j).getY()-points.get(i).getY())
+            				 + points.get(i).getX())) {
+          result = !result;
+        }
+      }
+      return result;
+	}
 }
