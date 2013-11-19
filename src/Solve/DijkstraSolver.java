@@ -1,5 +1,8 @@
 package Solve;
-
+/**
+ * @author Frederik Clinckemaillie
+ * This class implements Dijkstras Algorithm for finding the shortest path
+ */
 import java.util.ArrayList;
 
 import Objects.Line;

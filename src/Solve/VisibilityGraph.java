@@ -1,5 +1,6 @@
 package Solve;
 
+
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
 
@@ -7,6 +8,12 @@ import Objects.Line;
 import Objects.Obstacle;
 import Objects.Vertex;
 
+/**
+ * 
+ * @author Frederik Clinckemaillie
+ * This class calculates the Visibility of points to figure out which path is free of obstacles
+ *
+ */
 public class VisibilityGraph {
 	
 	public VisibilityGraph(){

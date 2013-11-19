@@ -1,4 +1,8 @@
 package Draw;
+/**
+ * @author Frederik Clinckemaillie
+ * This class draws the scene, making heavy use of the LineDrawer class to accomplish this.
+ */
 
 import javax.swing.*;
 
