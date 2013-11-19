@@ -128,12 +128,12 @@ public class Obstacle {
 			}
 			//if pi is not strictly left, then pop the top of stack. But this is already handled.
 		}
-		System.out.println("convexStack:"+convexStack);
+		//System.out.println("convexStack:"+convexStack);
 		//Pop the convex hull points into a list
 		convexHullPoints = new ArrayList<Vertex>(convexStack.size());
 		int j = 0;
 		while(true) {
-			System.out.println(j++);
+			//System.out.println(j++);
 			try
 			{
 				convexHullPoints.add(convexStack.pop());

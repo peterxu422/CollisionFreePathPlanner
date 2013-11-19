@@ -40,7 +40,7 @@ public class DijkstraSolver {
 
 	public ArrayList<Line> findPath(Vertex start, Vertex end) {
 		
-		int startNodeIndex = -1, endNodeIndex = -1;
+		int startNodeIndex = nodes.size() - 3, endNodeIndex = nodes.size() - 2;
 		for (int nodeItt = nodes.size()-1; nodeItt >= 0; nodeItt --)
 		{
 			

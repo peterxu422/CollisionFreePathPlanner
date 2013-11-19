@@ -37,7 +37,7 @@ public class Robot {
 	//Not in use at the moment. Not quite functional either
 	public void changeOrientation() 
 	{
-		System.out.println(toString());
+		//System.out.println(toString());
 		//Change to downward orientation. Set the new ref to the original lowRight
 		upRight.setX(ref.getX() - diameter);
 		lowLeft.setY(ref.getY() + diameter);
@@ -45,7 +45,7 @@ public class Robot {
 		verts[1] = upRight;
 		verts[2] = lowLeft;
 		verts[3] = lowRight;
-		System.out.println(toString());
+		//System.out.println(toString());
 		
 		/*
 		Vertex tmp1 = ref;

@@ -69,12 +69,14 @@ public class homework4 {
 		
 		//Calculate the convex Hull points
 		int size = obstacles.size();
+		ArrayList<Obstacle> expandedObs = new ArrayList<Obstacle>();
+		expandedObs.add(obstacles.get(0));
 		for(int i=1; i < size; i++)
 		{
 			obstacles.get(i).ExpandObstacle();
 			obstacles.get(i).computeConvexHull();
+			expandedObs.add(new Obstacle(obstacles.get(i).getConvexHullPoints()));
 		}
-		
 		
 		//Draw Obstacles
 		SceneDrawer aDrawer = new SceneDrawer();
@@ -84,12 +86,10 @@ public class homework4 {
 		aDrawer.drawPoint(startPoint, "start");
 		aDrawer.drawPoint(endPoint, "end");
 		VisibilityGraph visGraph = new VisibilityGraph();
-		ArrayList<Line> visLines = visGraph.calculateVisibility(obstacles,startPoint,endPoint);
-		//aDrawer.drawLines(visLines, "blue");
+		ArrayList<Line> visLines = visGraph.calculateVisibility(expandedObs,startPoint,endPoint);
+		aDrawer.drawLines(visLines, "blue");
 		DijkstraSolver aDijkSolver = new DijkstraSolver(visLines);
 		ArrayList <Line> path = aDijkSolver.findPath(startPoint, endPoint);
 		aDrawer.drawLines(path, "green",3);
-		
-		
 	}
 }
