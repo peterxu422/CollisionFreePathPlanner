@@ -10,10 +10,17 @@ public class Obstacle {
 	private ArrayList<Vertex> convexHullPoints;
 	private Vertex p0;
 	private Stack<Vertex> convexStack;
-	private final double robotSize = 0.47;
+
 	private Robot robotClone;
 	
 	public Obstacle (ArrayList<Vertex> points)
+	{
+		this.myPoints = points;
+		robotClone = new Robot(new Vertex(0,0));
+		myExpandedPoints = null;
+	}
+	
+	public Obstacle (ArrayList<Vertex> points, ArrayList<Vertex> expandedPoints)
 	{
 		this.myPoints = points;
 		robotClone = new Robot(new Vertex(0,0));

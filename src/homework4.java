@@ -90,6 +90,7 @@ public class homework4 {
 		aDrawer.drawLines(visLines, "blue");
 		DijkstraSolver aDijkSolver = new DijkstraSolver(visLines);
 		ArrayList <Line> path = aDijkSolver.findPath(startPoint, endPoint);
+		System.out.println(visLines.size());
 		aDrawer.drawLines(path, "green",3);
 	}
 }

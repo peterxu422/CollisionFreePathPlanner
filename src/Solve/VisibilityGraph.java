@@ -1,5 +1,6 @@
 package Solve;
 
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
 
 import Objects.Line;
@@ -24,16 +25,23 @@ public class VisibilityGraph {
 		ArrayList<Line> out = new ArrayList <Line>();
 		
 		for(int startObs =1; startObs < obstacles.size(); startObs++){
-			for(int startVert = 0; startVert < obstacles.get(startObs).getPoints().size(); startVert ++){
+			
+			ArrayList <Vertex> startPoints = obstacles.get(startObs).getExpandedPoints();
+			if(startPoints == null)
+				startPoints = obstacles.get(startObs).getPoints();
+			for(int startVert = 0; startVert < startPoints.size(); startVert ++){
 				for(int endObs =1; endObs < obstacles.size() ; endObs++){
-					for(int endVert = 0; endVert < obstacles.get(endObs).getPoints().size(); endVert ++){
-						
-						if(startObs != endObs || (obstacles.get(endObs).getPoints().size() > 1 &&
-								((startVert == (endVert + 1) % obstacles.get(endObs).getPoints().size()) ||
-								(endVert == (startVert + 1) % obstacles.get(startObs).getPoints().size())))){
+					ArrayList <Vertex> endPoints = obstacles.get(endObs).getExpandedPoints();
+					if(endPoints == null)
+						endPoints = obstacles.get(endObs).getPoints();
+					
+					for(int endVert = 0; endVert < endPoints.size(); endVert ++){
+						if(startObs != endObs || (endPoints.size() > 1 &&
+								((startVert == (endVert + 1) % endPoints.size()) ||
+								(endVert == (startVert + 1) % startPoints.size())))){
 							
-							Vertex vert1 = obstacles.get(startObs).getPoints().get(startVert);
-							Vertex vert2 = obstacles.get(endObs).getPoints().get(endVert);
+							Vertex vert1 = startPoints.get(startVert);
+							Vertex vert2 = endPoints.get(endVert);
 							
 							if(!intersect(vert1, vert2, obstacles))
 							{
@@ -53,28 +61,33 @@ public class VisibilityGraph {
 		double x2 = vertex2.getX();double y2 = vertex2.getY();
 		
 		for(int obsItt = 0; obsItt< obstacles.size(); obsItt ++ ){
-			if(!(isContainedIn(obstacles.get(obsItt),vertex) || isContainedIn(obstacles.get(obsItt),vertex2)))
-				System.out.println(isContainedIn(obstacles.get(obsItt),vertex) + " " +isContainedIn(obstacles.get(obsItt),vertex2));
-			if(obsItt > 0 &&(isContainedIn(obstacles.get(obsItt),vertex)|| isContainedIn(obstacles.get(obsItt),vertex2)))
-				return true;
-			Obstacle obs = obstacles.get(obsItt);
-			for(int vertItt = 0; vertItt< obs.getPoints().size(); vertItt ++ )
+			if(obsItt > 0 && isWithin(obstacles.get(obsItt),new Vertex((vertex.getX() + vertex2.getX())/2,
+																			(vertex.getY() + vertex2.getY())/2)))
 			{
-				double x3 = obs.getPoints().get(vertItt).getX(); 
-				double y3 = obs.getPoints().get(vertItt).getY();
+				return true;
+			}
+			Obstacle obs = obstacles.get(obsItt);
+			ArrayList <Vertex> points;
+			points = obs.getExpandedPoints();
+			if(points == null)
+				points = obs.getPoints();
+			for(int vertItt = 0; vertItt< points.size(); vertItt ++ )
+			{
+				double x3 = points.get(vertItt).getX(); 
+				double y3 = points.get(vertItt).getY();
 
-				double x4 = obs.getPoints().get((vertItt + 1) % obs.getPoints().size()).getX(); 
-				double y4 = obs.getPoints().get((vertItt + 1) % obs.getPoints().size()).getY();
+				double x4 =	points.get((vertItt + 1) % points.size()).getX(); 
+				double y4 = points.get((vertItt + 1) % points.size()).getY();
 				
 				double d = (y4-y3)*(x2-x1) - (x4-x3)* (y2-y1);
 				
 				double eps = 0.01;
-			    if (Math.abs(d)> eps)
+			    if (Math.abs(d)> 0)
 			    {
 			   
 					double xi = x1 + (((x4-x3)*(y1-y3)-(y4-y3)* (x1 - x3))/d) * (x2 - x1) ;
 					double yi = y1 + (((x4-x3)*(y1-y3)-(y4-y3)* (x1 - x3))/d) * (y2 - y1) ;
-				
+
 					if(xi + eps>= Math.min(x1, x2) && xi + eps >= Math.min(x4, x3) &&
 						xi- eps <= Math.max(x2, x1) && xi - eps <= (Math.max(x4, x3) ) &&
 						yi + eps>= Math.min(y1, y2) && yi + eps >= Math.min(y4, y3) &&
@@ -115,19 +128,32 @@ public class VisibilityGraph {
 		return false;
 	}
 
+	private boolean isWithin(Obstacle obstacle, Vertex vertex) {
+		double eps = 0.01;
+		boolean result = isContainedIn(obstacle,new Vertex (vertex.getX()+eps, vertex.getY()+eps)) && 
+				 isContainedIn(obstacle,new Vertex (vertex.getX()+eps, vertex.getY() - eps)) &&
+				 isContainedIn(obstacle,new Vertex (vertex.getX()-eps, vertex.getY()+eps)) &&
+				 isContainedIn(obstacle,new Vertex (vertex.getX()-eps, vertex.getY()+eps));
+	return result;
+	}
+	
 	private boolean isContainedIn(Obstacle obstacle, Vertex vertex) {
 
       int i;
       int j;
-      ArrayList<Vertex> points = obstacle.getPoints();
+  	
+    ArrayList<Vertex>	points = obstacle.getPoints();
+	  
       boolean result = false;
       for (i = 0, j = points.size() - 1; i < points.size(); j = i++) {
-        if ((points.get(i).getY() > vertex.getY()) != (points.get(j).getY() > vertex.getY()) &&
-            (vertex.getX() <= (points.get(i).getX() - 
-            				 points.get(i).getX()) * (vertex.getY() - points.get(i).getY()) / (points.get(j).getY()-points.get(i).getY())
-            				 + points.get(i).getX())) {
-          result = !result;
-        }
+	        if ((points.get(i).getY() > vertex.getY()) != (points.get(j).getY() > vertex.getY()) &&
+	            (vertex.getX() <= (points.get(i).getX() - 
+	            				 points.get(i).getX()) * (vertex.getY() - points.get(i).getY()) / (points.get(j).getY()-points.get(i).getY())
+	            				 + points.get(i).getX())) {
+	        		if (Line2D.ptSegDist(points.get(i).getX(),points.get(i).getY(),
+	        						points.get(j).getX(),points.get(j).getY(), vertex.getX(), vertex.getY()) > 0.01) 
+	        		result = !result;
+	        }
       }
       return result;
 	}
