@@ -19,6 +19,13 @@ public class VisibilityGraph {
 	public VisibilityGraph(){
 	}
 	
+	/**
+	 *  Calculates the visibility between all points in the obstacles and the start and end points
+	 * @param obstacles
+	 * @param startPoint
+	 * @param endPoint
+	 * @return
+	 */
 	public ArrayList<Line> calculateVisibility(ArrayList<Obstacle> obstacles,Vertex startPoint,
 											   Vertex endPoint) {
 		//Adding an obstacle with just the start and endpoint
@@ -62,7 +69,13 @@ public class VisibilityGraph {
 		return out;
 	}
 
-
+/**
+ * Finds if the line made from vertex to vertex2 intersects any of the obstacles
+ * @param vertex
+ * @param vertex2
+ * @param obstacles
+ * @return
+ */
 	public boolean intersect(Vertex vertex, Vertex vertex2,ArrayList<Obstacle> obstacles) {
 		double x1 = vertex.getX(); double y1 = vertex.getY();
 		double x2 = vertex2.getX();double y2 = vertex2.getY();
@@ -134,7 +147,12 @@ public class VisibilityGraph {
 	
 		return false;
 	}
-
+/**
+ * Finds out if the given vertex is within any of the obstacles.  
+ * @param obstacle
+ * @param vertex
+ * @return
+ */
 	private boolean isWithin(Obstacle obstacle, Vertex vertex) {
 		double eps = 0.01;
 		boolean result = isContainedIn(obstacle,new Vertex (vertex.getX()+eps, vertex.getY()+eps)) && 
@@ -144,6 +162,12 @@ public class VisibilityGraph {
 	return result;
 	}
 	
+	/**
+	 * Finds if the given vertex is contained in  any of the obstacles. Helper function to isWithin 
+	 * @param obstacle
+	 * @param vertex
+	 * @return
+	 */
 	private boolean isContainedIn(Obstacle obstacle, Vertex vertex) {
 
       int i;

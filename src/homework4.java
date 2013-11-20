@@ -12,6 +12,11 @@ import Objects.Vertex;
 import Solve.DijkstraSolver;
 import Solve.VisibilityGraph;
 
+/**
+ * 
+ * @author Frederik Clinckemaillie
+ *
+ */
 public class homework4 {
 
 	public static void main(String[] args) throws NumberFormatException, IOException {

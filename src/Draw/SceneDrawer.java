@@ -20,7 +20,9 @@ public class SceneDrawer  {
 	private double lowX;
 	private double highX;
 	private double highY;
-	
+/**
+ * Constructor	
+ */
     public SceneDrawer()
     {
     	JFrame testFrame = new JFrame();
@@ -32,6 +34,13 @@ public class SceneDrawer  {
         testFrame.setVisible(true);
     }
    
+    /**
+     *  Set the scaling dimensions of the GUI
+     * @param lowX
+     * @param lowY
+     * @param highX
+     * @param highY
+     */
 	public void setDimensions (double lowX, double lowY, double highX, double highY)
 	{
 		this.lowX = lowX;
@@ -40,6 +49,10 @@ public class SceneDrawer  {
 		this.highY = highY;
 	}
 
+	/**
+	 * Draws a list of obstacles on the scene
+	 * @param obstacles
+	 */
     public void drawObstacles(ArrayList <Obstacle> obstacles)
     {
     	for(Obstacle obs: obstacles)
@@ -53,7 +66,10 @@ public class SceneDrawer  {
     	}
     }
     
-    
+    /**
+     * Draws the extanded obstacles on the GUI
+     * @param obstacles
+     */
     public void drawConvexHull(ArrayList<Obstacle> obstacles)
     {
     	int size = obstacles.size();
@@ -73,11 +89,21 @@ public class SceneDrawer  {
 							 new Color(210,0,210), 2);
     	}
     }
-    
+    /**
+     * Draws the list of lines with the given strColor color
+     * @param lines
+     * @param strColor
+     */
     public void drawLines(ArrayList<Line> lines, String strColor) {
     	drawLines(lines,strColor,1);
     }
     
+    /**
+     * Draws the list of line with the given color and thickness 
+     * @param lines
+     * @param strColor
+     * @param thickness
+     */
     public void drawLines(ArrayList<Line> lines, String strColor, int thickness) {
     	for(Line line: lines)
     	{
@@ -100,6 +126,11 @@ public class SceneDrawer  {
     	}	
 	}
     
+    /**
+     * Draws a small cross marking a point of the given color at the given position
+     * @param point
+     * @param strCol
+     */
     public void drawPoint(Vertex point, String strCol)
     {
     	int x = toPixelCoord(point.getX(),'x');
@@ -117,7 +148,13 @@ public class SceneDrawer  {
     	comp.addLine(x,y-3,x,y+3,color);
     }
     
-    private int toPixelCoord(double x1, char axis) {
+    /**
+     * Translates between GUI x,y values and room x,y values
+     * @param x1
+     * @param axis
+     * @return
+     */
+    private int toPixelCoord(double value, char axis) {
 		double scaling = 1, offset = 0;
 		int windowSize;
 		 if ((highX - lowX) / 820  > (highY - lowY)/ 640){
@@ -134,6 +171,6 @@ public class SceneDrawer  {
 		 else
 			 offset = 0.5* scaling - ( highY + lowY ) / 2;
 			
-		return  windowSize - (int)(( x1 + offset)* windowSize / scaling); 
+		return  windowSize - (int)(( value + offset)* windowSize / scaling); 
 	}    
 }

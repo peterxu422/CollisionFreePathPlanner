@@ -7,7 +7,12 @@ import java.awt.Graphics2D;
 import java.util.LinkedList;
 
 import javax.swing.JComponent;
-
+/**
+ * 
+ * @author Frederik Clinckemaillie
+ * This class has a set of functions to draw lines.
+ *
+ */
 public class LineDrawer  extends JComponent{
 
 		private static class Line{

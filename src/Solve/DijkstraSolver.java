@@ -40,7 +40,12 @@ public class DijkstraSolver {
 			nodes.get(index).addLink(nodeItt, aLine);
 		}
 	}
-
+/**
+ * Finds the shortest path from the start point to the end point
+ * @param start
+ * @param end
+ * @return
+ */
 	public ArrayList<Line> findPath(Vertex start, Vertex end) {
 		
 		int startNodeIndex = nodes.size() - 3, endNodeIndex = nodes.size() - 2;
@@ -92,6 +97,11 @@ public class DijkstraSolver {
 		return path;
 	}
 
+	/**
+	 * Gets the next unvisted node with the shortest distance from the start point
+	 * @param unvisitedNodes the arraylist of all unvisited nodes.
+	 * @return
+	 */
 	private int getSmallestDistUnvisited(ArrayList<Integer> unvisitedNodes) {
 		double smallestDist = 5000;
 		int smallestIndex = 0;
