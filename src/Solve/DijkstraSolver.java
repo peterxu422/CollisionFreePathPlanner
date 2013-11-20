@@ -90,7 +90,8 @@ public class DijkstraSolver {
 		{
 			currentNodeIndex = nodes.get(currentNodeIndex).getPreviousNode();
 			
-			path.add(new Line(pathStart,nodes.get(currentNodeIndex)));
+			//path.add(new Line(pathStart,nodes.get(currentNodeIndex))); //The start and end nodes appear to be in the opposite order
+			path.add(new Line(nodes.get(currentNodeIndex), pathStart)); 
 			pathStart = nodes.get(currentNodeIndex);
 		}
 		
