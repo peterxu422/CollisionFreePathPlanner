@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import Draw.SceneDrawer;
 import Objects.Obstacle;
@@ -24,15 +25,19 @@ public class homework4 {
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		
 		//Testing code for Sending commands to create
-		ArrayList<Line> p = new ArrayList<Line>(4);
-		p.add(new Line(new Vertex(0,0), new Vertex(-2,0)));
-		p.add(new Line(new Vertex(-2,0), new Vertex(-2,2)));
-		p.add(new Line(new Vertex(-2,2), new Vertex(2,2)));
-		p.add(new Line(new Vertex(2,2), new Vertex(2,-3)));
+		/*
+		ArrayList<Line> p = new ArrayList<Line>(7);
+		p.add(new Line(new Vertex(0,0), new Vertex(2,2)));
+		p.add(new Line(new Vertex(2,2), new Vertex(3,1)));
+		p.add(new Line(new Vertex(3,1), new Vertex(4,-2)));
+		p.add(new Line(new Vertex(4,-2), new Vertex(-1,-5)));
+		p.add(new Line(new Vertex(-1,-5), new Vertex(-3,2)));
+		p.add(new Line(new Vertex(-3,2), new Vertex(0,2)));
+		p.add(new Line(new Vertex(0,2), new Vertex(0,0)));
 		writeCommands(p, args[2]);
-		System.exit(1);
-		
-		if (args.length != 2)
+		//System.exit(1);
+		*/
+		if (args.length != 3)
 		{
 			System.out.println("Usage: java homework4 obstacleFileName startGoalFileName commandsFilePath");
 			return;
@@ -108,7 +113,10 @@ public class homework4 {
 		DijkstraSolver aDijkSolver = new DijkstraSolver(visLines);
 		ArrayList <Line> path = aDijkSolver.findPath(startPoint, endPoint);
 		System.out.println(visLines.size());
+		Collections.reverse(path); //findPath() calculates the path in the opposite order of traversal. Reverse it
 		aDrawer.drawLines(path, "green",3);
+		writeCommands(path, args[2]);
+		System.out.println(path);
 	}
 	
 	public static void writeCommands(ArrayList<Line> path, String fpath)  throws IOException
@@ -125,8 +133,6 @@ public class homework4 {
 		Vertex st = curline.getStart();
 		Vertex end = curline.getEnd();
 		
-		st = new Vertex(0,0);
-		end = new Vertex(-2,0);
 		double angle = (double) Math.toDegrees(Math.atan2(end.getY() - st.getY(), end.getX() - st.getX()));
 		
 		if(angle < 0)
