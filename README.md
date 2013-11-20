@@ -56,3 +56,17 @@ Vertices:  <br>
 - Members: double x, y  <br>
 </p>
 
+<p>
+Testing for Roborace <br>
+
+1) First run the java program with the appropriate obstacles and start goal files.
+run configurations: java homework4 <obstacleFileName> <startGoalFileName> <commandsFilePath> <br>
+
+obstacleFile should be located in one directory level above source code. <br>
+startGoalFile should be located in one directory level above source code. <br>
+commandsFilePath should be located in the MatLab directory where the Roomba will get the instructions <br>
+
+2) Upload the file with "map" at the end of its name into the SimulatorGUI. Position the robot at (0,0) and orient it along the +x direction.
+Load the hw4_team23.m file to let the robot traverse the path. Make sure the correct obstacleFile and startGoalFile was used in the java program.
+
+</p>
