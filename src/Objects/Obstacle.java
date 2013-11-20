@@ -162,7 +162,14 @@ public class Obstacle {
 		}
 	}
 	
-	public boolean isLeft(Vertex c, Vertex b, Vertex a)
+	/**
+	 * 
+	 * @param c the other end of one vector which is the point of interest
+	 * @param b the other end of one vector which is the line of interest
+	 * @param a the point where the two vectors stem from. The middle
+	 * @return
+	 */
+	public static boolean isLeft(Vertex c, Vertex b, Vertex a)
 	{
 		//Resources: http://mathworld.wolfram.com/CrossProduct.html
 		//http://stackoverflow.com/questions/3461453/determine-which-side-of-a-line-a-point-lies
