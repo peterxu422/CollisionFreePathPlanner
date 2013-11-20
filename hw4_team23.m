@@ -57,12 +57,13 @@ function hw2_Team23(serPort)
 	time = zeros(maxDuration, 1);	% Create arrays for time and orientation to be printed later.
 	orient = zeros(maxDuration, 1);
 	tctr = 1;
-    
-    [cmd, val] = textread('commands.txt', '%s %d')
+    %travelDist(serPort, 0.5, 2);
+    %pause(5.0);
+    [cmd, val] = textread('commands.txt', '%s %f')
     
     for i=1:length(cmd)
        if strcmp(cmd(i), 'move')
-          v = 10;
+          v = 0.35;
           travelDist(serPort, v, val(i));
        elseif strcmp(cmd(i), 'turn')
            angval = val(i);
@@ -75,7 +76,7 @@ function hw2_Team23(serPort)
                
            SetFwdVelAngVelCreate(serPort, 0, w);
            ang = angval * pi/180;
-          [currentPosX, currentPosY, currentRot] =angleTurn(serPort, ang, currentPosX, currentPosY, currentRot);
+           [currentPosX, currentPosY, currentRot] =angleTurn(serPort, ang, currentPosX, currentPosY, currentRot);
        end
     end
     

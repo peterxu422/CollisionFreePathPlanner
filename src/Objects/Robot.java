@@ -17,7 +17,7 @@ public class Robot {
 	public Robot(Vertex ref)
 	{
 		this.ref = ref;
-		this.diameter = 0.35;
+		this.diameter = 0.45;
 		upRight = new Vertex(ref.getX()+diameter, ref.getY());
 		lowLeft = new Vertex(ref.getX(), ref.getY() - diameter);
 		lowRight = new Vertex(ref.getX() + diameter, ref.getY() - diameter);

@@ -27,15 +27,11 @@ public class homework4 {
 		//Testing code for Sending commands to create
 		/*
 		ArrayList<Line> p = new ArrayList<Line>(7);
-		p.add(new Line(new Vertex(0,0), new Vertex(2,2)));
-		p.add(new Line(new Vertex(2,2), new Vertex(3,1)));
-		p.add(new Line(new Vertex(3,1), new Vertex(4,-2)));
-		p.add(new Line(new Vertex(4,-2), new Vertex(-1,-5)));
-		p.add(new Line(new Vertex(-1,-5), new Vertex(-3,2)));
-		p.add(new Line(new Vertex(-3,2), new Vertex(0,2)));
-		p.add(new Line(new Vertex(0,2), new Vertex(0,0)));
+		p.add(new Line(new Vertex(0,0), new Vertex(-2,-2)));
+		p.add(new Line(new Vertex(-2,-2), new Vertex(-3,-1)));
+		p.add(new Line(new Vertex(-3,-1), new Vertex(-3,-4)));
 		writeCommands(p, args[2]);
-		//System.exit(1);
+		System.exit(1);
 		*/
 		if (args.length != 3)
 		{
@@ -135,8 +131,8 @@ public class homework4 {
 		
 		double angle = (double) Math.toDegrees(Math.atan2(end.getY() - st.getY(), end.getX() - st.getX()));
 		
-		if(angle < 0)
-			angle += 360;
+		//if(angle < 0)
+			//angle += 360;
 		
 		bw.write("turn " + angle + "\n"); //Initial turn is always positive angle.
 		bw.write("move " + curline.getDist() + "\n");
@@ -164,7 +160,7 @@ public class homework4 {
 		    double v2magn = vect2.getDistanceFrom(origin);
 		    angle = Math.toDegrees(Math.abs(Math.acos(dotprod/(v1magn*v2magn)))); //May need to be careful about negative or positive zero here.
 		    System.out.println(dotprod/(v1magn*v2magn) + " v1mag:"+v1magn + " v2mag:"+v2magn + " prev:" + prev + " cur:" + cur + " next:" + next
-		    		+ " vect1:"+vect1 + " vect2:"+vect2);
+		    		+ "\n vect1:"+vect1 + " vect2:"+vect2 + " angle:"+angle + "\n");
 		    //Determine if next is left or right of cur prev using isLeft(). Set negative or positive based on that.
 		    //For roomba, w>0 is CCwise. w<0 is Cwise
 		    
